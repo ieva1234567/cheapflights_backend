@@ -33,7 +33,6 @@ function FlightResults({ searchResults }) {
                     {searchResults.search_params.destination_iata 
                       ? flight.destination_name || flight.destination + " - " + (flight.destination_city || 'Unknown')
                       : flight.destination_name || 'All Destinations'}
-                    }
                   </h4>
                   <div className="flight-details">
                     <p><strong>Flight:</strong> {flight.flight_number}</p>
@@ -44,6 +43,7 @@ function FlightResults({ searchResults }) {
                     <p><strong>Available Seats:</strong> {flight.available_seats}</p>
                   </div>
                 </div>
+              </div>
             ))}
           </div>
         </div>
@@ -67,6 +67,7 @@ function FlightResults({ searchResults }) {
                     <p><strong>Available Seats:</strong> {flight.available_seats}</p>
                   </div>
                 </div>
+              </div>
             ))}
           </div>
         </div>
