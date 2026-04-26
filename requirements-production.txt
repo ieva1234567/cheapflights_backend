@@ -1,0 +1,36 @@
+# Production requirements for CheapFlights application
+
+# Core Django
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+
+# Database
+psycopg2-binary==2.9.9
+
+# Web server
+gunicorn==21.2.0
+whitenoise==6.6.0
+
+# Cache
+redis==5.0.1
+django-redis==5.4.0
+
+# HTTP requests
+requests==2.31.0
+python-dateutil==2.8.2
+
+# Security
+cryptography==41.0.7
+
+# Environment variables
+python-decouple==3.8
+
+# Monitoring and logging
+sentry-sdk==1.38.0
+
+# Performance
+django-storages==1.14.2
+
+# Development utilities (optional for production)
+django-extensions==3.2.3
