@@ -27,13 +27,6 @@ COPY . /app/
 # Create static files directory
 RUN mkdir -p /app/staticfiles
 
-# Build React frontend
-WORKDIR /app/frontend
-RUN npm install && npm run build
-
-# Return to app directory
-WORKDIR /app
-
 # Collect static files
 RUN python manage.py collectstatic --settings=flightfinder.production --noinput
 
