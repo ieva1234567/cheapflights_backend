@@ -1,0 +1,9 @@
+# Ignore any frontend-related files to prevent auto-detection
+frontend/
+src/
+public/
+package*.json
+*.lock
+node_modules/
+build/
+dist/

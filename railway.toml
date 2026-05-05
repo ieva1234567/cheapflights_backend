@@ -1,0 +1,34 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+healthcheckPath = "/api/airports/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[[services]]
+name = "web"
+source = "."
+[services.variables]
+PYTHON_VERSION = "3.11"
+[services.ports]
+port = 8000
+
+[phases.setup]
+nixPkgs = ["python311"]
+
+[phases.build]
+cmds = [
+  "pip install -r requirements-production.txt",
+  "python manage.py collectstatic --settings=flightfinder.production --noinput",
+  "python manage.py migrate --settings=flightfinder.production --noinput"
+]
+
+[start]
+cmd = "gunicorn --bind 0.0.0.0:$PORT flightfinder.wsgi:application --settings=flightfinder.production"
+
+# Explicitly disable frontend detection
+[deploy]
+autoDeploy = true
+restartPolicyType = "ON_FAILURE"
