@@ -77,13 +77,22 @@ def search_ryanair_flights(request):
     try:
         # Search for flights
         destination_iata = data.get('destination_iata') or None
+        
+        # Handle both date objects and string dates
+        def format_date(date_obj):
+            if date_obj is None:
+                return None
+            if hasattr(date_obj, 'strftime'):
+                return date_obj.strftime('%Y-%m-%d')
+            return str(date_obj)  # Convert string dates to string
+        
         result = api.get_cheapest_flights_in_range(
             origin_iata=data['origin_iata'],
             destination_iata=destination_iata,
-            departure_date_from=data['departure_date_from'].strftime('%Y-%m-%d'),
-            departure_date_to=data['departure_date_to'].strftime('%Y-%m-%d'),
-            return_date_from=data.get('return_date_from', None),
-            return_date_to=data.get('return_date_to', None),
+            departure_date_from=format_date(data['departure_date_from']),
+            departure_date_to=format_date(data['departure_date_to']),
+            return_date_from=format_date(data.get('return_date_from', None)),
+            return_date_to=format_date(data.get('return_date_to', None)),
             passengers=data['passengers']
         )
         

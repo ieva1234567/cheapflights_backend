@@ -490,8 +490,9 @@ class RyanairAPI:
                 flight_duration = random.randint(1, 4)  # 1-4 hours
                 
                 departure_time = f"{current_date.strftime('%Y-%m-%d')}T{departure_hour:02d}:{departure_minute:02d}:00"
-                arrival_time_obj = current_date.replace(hour=departure_hour + flight_duration, minute=departure_minute)
-                arrival_time = arrival_time_obj.strftime('%Y-%m-%dT%H:%M:%S')
+                # Calculate arrival time properly handling hour overflow
+                arrival_datetime = current_date.replace(hour=departure_hour, minute=departure_minute) + timedelta(hours=flight_duration)
+                arrival_time = arrival_datetime.strftime('%Y-%m-%dT%H:%M:%S')
                 
                 # Generate realistic prices based on route popularity
                 base_price = random.uniform(20, 150)
