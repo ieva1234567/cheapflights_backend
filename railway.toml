@@ -6,6 +6,7 @@ healthcheckPath = "/api/airports/"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
+autoDeploy = true
 
 [[services]]
 name = "web"
@@ -27,8 +28,3 @@ cmds = [
 
 [start]
 cmd = "gunicorn --bind 0.0.0.0:$PORT flightfinder.wsgi:application --settings=flightfinder.production"
-
-# Explicitly disable frontend detection
-[deploy]
-autoDeploy = true
-restartPolicyType = "ON_FAILURE"
